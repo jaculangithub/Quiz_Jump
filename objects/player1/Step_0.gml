@@ -1,3 +1,4 @@
+// Get input
 rightKey = keyboard_check(vk_right);
 leftKey = keyboard_check(vk_left);
 
@@ -19,14 +20,19 @@ if (yspd >= 0) {
     // Check if there's a platform directly below the player's feet
     if (collision_line(_left, _bottom + 1, _right, _bottom + 1, Platform, true, true)) {
         yspd = jspd; // Jump speed (negative value moves up)
+        
+        // Change to jump sprite and reset animation
+        sprite_index = spr_player_jump; // Assign the jump sprite
+        image_index = 0; // Start the animation from the first frame
+        image_speed = 1; // Set animation speed (1 = normal speed)
     }
 }
 
 // Move left & right automatically at walls
-if (x <= 0) {
+if ((x - sprite_width / 2) <= 0) {
     moveDir = 1; // Move right if touching left wall
 } 
-else if (x >= room_width - sprite_width) {
+else if ((x + sprite_width / 2) >= room_width) {
     moveDir = -1; // Move left if touching right wall
 }
 
@@ -35,3 +41,9 @@ xspd = moveDir * moveSpd; // Apply horizontal movement
 // Update player position
 x += xspd;
 y += yspd;
+
+// Stop jump animation if it reaches the last frame
+if (sprite_index == spr_player_jump && image_index >= sprite_get_number(spr_player_jump) - 1) {
+    image_speed = 0; // Stop the animation
+    image_index = sprite_get_number(spr_player_jump) - 1; // Stay on the last frame
+}
