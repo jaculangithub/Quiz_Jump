@@ -18,8 +18,12 @@ if (yspd >= 0) {
     var _bottom = bbox_bottom;  // Bottom edge of player's collision box
     
     // Check if there's a platform directly below the player's feet
-    if (collision_line(_left, _bottom + 1, _right, _bottom + 1, Platform, true, true)) {
+    if (collision_line(_left, _bottom + 1, _right, _bottom + 1, Platform, true, true) || 
+        collision_line(_left, _bottom + 1, _right, _bottom + 1, ground, true, true)) {
         yspd = jspd; // Jump speed (negative value moves up)
+        
+        // Increment the platform jump counter
+        global.platforms_jumped += 1;
         
         // Change to jump sprite and reset animation
         sprite_index = spr_player_jump; // Assign the jump sprite
@@ -47,3 +51,10 @@ if (sprite_index == spr_player_jump && image_index >= sprite_get_number(spr_play
     image_speed = 0; // Stop the animation
     image_index = sprite_get_number(spr_player_jump) - 1; // Stay on the last frame
 }
+
+// In the player's Step Event:
+if (place_meeting(x, y, obj_lava)) {
+    // Handle player death or damage
+    instance_destroy(); // Example: Destroy the player
+}
+
