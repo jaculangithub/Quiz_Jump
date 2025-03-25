@@ -85,6 +85,8 @@
     {"id":{"name":"spr_title","path":"sprites/spr_title/spr_title.yy",},},
     {"id":{"name":"spr_trophy","path":"sprites/spr_trophy/spr_trophy.yy",},},
     {"id":{"name":"spr_txtfield","path":"sprites/spr_txtfield/spr_txtfield.yy",},},
+    {"id":{"name":"Sprite23","path":"sprites/Sprite23/Sprite23.yy",},},
+    {"id":{"name":"Sprite24","path":"sprites/Sprite24/Sprite24.yy",},},
     {"id":{"name":"Sprite6","path":"sprites/Sprite6/Sprite6.yy",},},
   ],
   "resourceType":"GMProject",
