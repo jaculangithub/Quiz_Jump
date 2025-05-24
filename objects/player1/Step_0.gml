@@ -1,8 +1,25 @@
+/// at top of obj_enemy, obj_player, etc.
+if (obj_game_controller.paused) {
+   
+	exit;  // skip the rest of this Step
+	
+}
+
+
 // Get input
 rightKey = keyboard_check(vk_right);
 leftKey = keyboard_check(vk_left);
 
 moveDir = rightKey - leftKey;
+
+//newl adedd 
+// Freeze player when quiz is active
+//if (instance_exists(obj_quiz_manager)) {
+//    if (obj_quiz_manager.game_paused) {
+//        speed = 0; // Stop movement
+//        exit; // Skip other step events (optional)
+//    }
+//}
 
 // Apply gravity
 yspd += grav;
@@ -27,6 +44,7 @@ if (yspd >= 0) {
         
         // Change to jump sprite and reset animation
         sprite_index = spr_player_jump; // Assign the jump sprite
+		audio_play_sound(snd_jump, 0, false)
         image_index = 0; // Start the animation from the first frame
         image_speed = 1; // Set animation speed (1 = normal speed)
     }
@@ -56,5 +74,11 @@ if (sprite_index == spr_player_jump && image_index >= sprite_get_number(spr_play
 if (place_meeting(x, y, obj_lava)) {
     // Handle player death or damage
     instance_destroy(); // Example: Destroy the player
+	room_goto(GameOverRoom);
+}
+
+// In the player's Step Event:
+if (place_meeting(x, y, obj_trophy)) {
+	room_goto(GameWonRoom);
 }
 

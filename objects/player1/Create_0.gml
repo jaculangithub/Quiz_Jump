@@ -7,7 +7,7 @@ yspd = 0;
 // Initialize jumping variables
 grav = 0.275;
 termVel = 10;
-jspd = -15;
+jspd = -12;
 
 // Initialize the coin counter
 global.coins_collected = 0;
