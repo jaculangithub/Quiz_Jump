@@ -1,0 +1,1 @@
+charSelected = 0;

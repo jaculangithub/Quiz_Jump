@@ -1,5 +1,5 @@
 // Check if the player has jumped on 3 platforms
-if (global.platforms_jumped >= 3) {
+if (global.timer > 500) {
     // Make the lava visible
     visible = true;
     
@@ -11,7 +11,7 @@ if (global.platforms_jumped >= 3) {
     
     // Set the lava's position to the bottom of the viewport
     x = camX + camWidth / 2; // Center horizontally
-    y = camY + camHeight - sprite_height / 2; // Align to the bottom
+    y = (camY + camHeight - sprite_height / 2) - (obj_game_controller.lavaLevel * 100); // Align to the bottom
     
     // Optional: Make the lava rise over time
  //   y -= lava_speed;
